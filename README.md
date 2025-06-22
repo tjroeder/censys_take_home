@@ -123,9 +123,9 @@ type Email struct {
 }
 
 type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Email    Email
+  ID       int    `json:"id"`
+  Username string `json:"username"`
+  Email    Email
 }
 ```
 
