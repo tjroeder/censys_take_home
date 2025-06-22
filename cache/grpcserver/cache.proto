@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "github.com/tjroeder/censys_take_home/cache/grpcserver";
+
+package grpcserver;
+
+// Cache defines the gRPC service interface to the caching service
+service Cache {
+  rpc Get (GetRequest) returns (GetResponse);
+  rpc Set (SetRequest) returns (SetResponse);
+  rpc Delete (DeleteRequest) returns (DeleteResponse);
+  // TODO: add Add gRPC method implementing CacheService.Add
+}
+
+// GetRequest accepts key and returns corresponding record if found
+message GetRequest {
+  // key defines the string identifier for cached records
+  string key = 1;
+}
+
+// GetResponse is the returned key-value pair record
+// if no value is found, returns error
+message GetResponse {
+  // value defines data of any type matching the found record
+  bytes value = 1;
+}
+
+// SetRequest accepts key-value pair for storage
+message SetRequest {
+  // key defines the string identifier for cached records
+  string key = 1;
+  // value defines data of any type to be stored
+  bytes value = 2;
+}
+
+// SetResponse is empty
+message SetResponse {}
+
+// DeleteRequest accepts the key, and deletes the corresponding 
+// matching record
+message DeleteRequest {
+  // key is the string identifier for the record to be deleted
+  string key = 1;
+}
+
+// DeleteResponse is empty
+message DeleteResponse{}
